@@ -1,0 +1,40 @@
+name: Event Ledger Update
+
+on:
+  schedule:
+    - cron: '0 */3 * * *'  # Every 3 hours (low frequency — only significant events)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-ledger:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Update event ledger
+        env:
+          FLARIENT_API_URL: ${{ secrets.FLARIENT_API_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+        run: python ledger.py
+
+      - name: Summary
+        run: |
+          echo "## Event Ledger Update" >> ${{ github.step_summary }}
+          echo "Updated at: $(date -u)" >> ${{ github.step_summary }}
+          echo "Events directory: `events/`" >> ${{ github.step_summary }}
