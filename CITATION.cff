@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this data in your research, please cite Flarient as the source."
+title: "Flarient Public Event Ledger"
+abstract: "A transparent, versioned record of significant space weather events using Git history as a transparency layer for forecasting verification."
+authors:
+  - family-names: Flarient
+    given-names: Team
+type: dataset
+keywords:
+  - space-weather
+  - forecasting
+  - transparency
+  - geomagnetic-storms
+  - solar-flares
+  - aurora
+license: MIT
+repository-code: "https://github.com/flarientglobal/flarient-event-ledger"
+url: "https://flarient.com"
+version: "1.0.0"
+date-released: "2026-08-19"
+preferred-citation:
+  type: dataset
+  title: "Flarient Public Event Ledger"
+  authors:
+    - family-names: Flarient
+      given-names: Team
+  year: 2026
+  url: "https://github.com/flarientglobal/flarient-event-ledger"
